@@ -1,0 +1,12 @@
+export const endpointMain = '/';
+export const endpointMovies = '/movies';
+export const endpointSavedMovies = '/saved-movies';
+export const endpointProfile = '/profile';
+export const endpointLogin = '/signin';
+export const endpointRegister = '/signup';
+export const endpointUnknown = '*';
+export const endpointMyGithub = 'https://github.com/SergeiP12345';
+export const endpointStaticWeb = 'https://github.com/SergeiP12345';
+export const endpointAdaptiveWeb = 'https://github.com/SergeiP12345';
+export const endpointSPA = 'https://github.com/SergeiP12345';
+export const endpointPraktikum = 'https://practicum.yandex.ru';
