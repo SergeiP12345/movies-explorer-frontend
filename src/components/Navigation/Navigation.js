@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import accountLogo from '../../images/account-icon.svg';
+import accountLogo2 from '../../images/account-icon2.svg';
 import './Navigation.css';
 import {
   endpointLogin,
@@ -8,8 +9,10 @@ import {
   endpointRegister,
   endpointSavedMovies,
 } from '../../vendor/constants/endpoints';
+import { useLocation } from 'react-router-dom';
 
 export default function Navigation({ isLoggedIn, onOpen }) {
+  const location = useLocation();
   return (
     <>
       {isLoggedIn ? (
@@ -17,7 +20,7 @@ export default function Navigation({ isLoggedIn, onOpen }) {
           <ul className='navigation__list list navigation__movies navigation__list_logged-in'>
             <li className='navigation__item'>
               <Link
-                className='navigation__link navigation__link_active link navigation__link_logged-in'
+                className={location.pathname === '/' ? 'navigation__link_main navigation__link_active link navigation__link_logged-in' : 'navigation__link navigation__link_active link navigation__link_logged-in'}
                 to={endpointMovies}
               >
                 Фильмы
@@ -25,7 +28,7 @@ export default function Navigation({ isLoggedIn, onOpen }) {
             </li>
             <li className='navigation__item'>
               <Link
-                className='navigation__link link navigation__link_logged-in'
+                className={location.pathname === '/' ? 'navigation__link_main navigation__link_active link navigation__link_logged-in' : 'navigation__link navigation__link_active link navigation__link_logged-in'}
                 to={endpointSavedMovies}
               >
                 Сохранённые фильмы
@@ -34,18 +37,23 @@ export default function Navigation({ isLoggedIn, onOpen }) {
           </ul>
           <ul className='navigation__list list navigation__account navigation__list_logged-in'>
             <li className='navigation__item'>
-              <img
-                className='navigation__link link'
-                src={accountLogo}
-                alt='иконка аккаунта'
-              />
-            </li>
-            <li className='navigation__item'>
-              <Link
+            <Link
                 className='navigation__link link'
                 to={endpointProfile}
-              ></Link>
+              >{location.pathname === '/' ? 
+              (<img
+                className={location.pathname === '/' ? 'navigation__link_main  link '  : 'navigation__link  link ' }
+                src={accountLogo2}
+                alt='иконка аккаунта'
+          
+              />    ): <img
+              className={location.pathname === '/' ? 'navigation__link_main  link '  : 'navigation__link  link ' }
+              src={accountLogo}
+              alt='иконка аккаунта'
+        
+            />}</Link>
             </li>
+           
           </ul>
           <button
             className='navigation__popup-button'

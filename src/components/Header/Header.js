@@ -5,6 +5,7 @@ import logo from '../../images/logo.svg';
 import { endpointMain } from '../../vendor/constants/endpoints';
 import { useLocation } from 'react-router-dom';
 
+
 export default function Header({ isLoggedIn, onOpen }) {
   const location = useLocation();
   return (

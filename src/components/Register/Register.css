@@ -1,7 +1,7 @@
 .register {
     margin: 0;
     padding: 70px 442px;
-    background-color: var(--background-color_light-grey-tree);
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -68,8 +68,9 @@
 }
 
 .register__button {
-    margin: 134px 0 0;
+    margin: 90px 0 0;
     padding: 15px 125px;
+    background-color: #2BE080;
 }
 
 .register__paragraph {
@@ -94,6 +95,9 @@
 @media screen and (max-width: 1279px) {
 
     .register {
+        margin: auto;
+        max-width: 396px;
+        padding-top: 230px;
         padding-right: 186px;
         padding-left: 186px;
     }
@@ -107,12 +111,13 @@
     }
 
     .register__button {
-        margin-top: 145px;
+        margin-top: 99px
     }
 }
 
 @media screen and (max-width: 767px) {
     .register {
+        padding-top: 57px;
         padding-right: 30px;
         padding-left: 30px;
         text-align: center;
@@ -131,7 +136,7 @@
     }
 
     .register__button {
-        margin-top: 238px;
+        margin-top: 181px;
         padding: 15px 67px;
         font-size: 12px;
         font-style: normal;

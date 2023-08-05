@@ -8,8 +8,8 @@
   --button_text_color: #fff;
   --button_text_color-blue: #2be080;
   --button_color_grey: #f4f4f4;
-  --button-error_color: #f8f8f8;
-  --button-error_text-color: #c2c2c2;
+  --button-error_color: #EE3465;
+  --button-error_text-color: #EE3465;
   --general_text_color: #000;
   --list_background-color: #e8e8e8;
   --preloader_color: #2be080;
@@ -18,8 +18,5 @@
   --underline-color_grey: #e8e8e8;
   --link_hover_color: #ccc;
   --search_border_color: rgba(170, 170, 170, 0.2);
-  --error_text-color: #ee3465;
-  --text_color-red: #ee3465;
-  --save_error_text-color: #ff004c;
   --input-focus_underline-color: #3456f3;
 }

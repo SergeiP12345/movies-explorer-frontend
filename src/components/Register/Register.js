@@ -49,7 +49,7 @@ export default function Register() {
                         required
                         minLength="2"
                         maxLength="30"
-                        placeholder='введите имя'
+                        placeholder='Виталий'
                         value={values.name}
                         onChange={handleChange}
                     />
@@ -64,7 +64,7 @@ export default function Register() {
                         required
                         minLength="2"
                         maxLength="30"
-                        placeholder='введите е-майл'
+                        placeholder='pohta@yandex.ru'
                         value={values.email}
                         onChange={handleChange}
                     />

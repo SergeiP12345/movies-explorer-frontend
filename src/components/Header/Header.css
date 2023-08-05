@@ -32,10 +32,19 @@
     padding-right: 18px;
   }
 }
-
+@media screen and (max-width: 768px) {
+.header__logged-in {
+ 
+  padding: 17px 25px 0px 32px;
+ 
+}
+}
 @media screen and (max-width: 767px) {
   .header {
     padding-left: 14px;
-    padding-right: 14px;
+    padding-right: 31px;
+  }
+  .header__logged-in {
+  padding:17px 40px 26px 13px;
   }
 }

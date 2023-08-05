@@ -11,7 +11,7 @@
 
 .profile__form {
     margin: 0 auto;
-    padding: 0 357px 200px;
+    padding: 0 357px 222px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -111,7 +111,7 @@
 .profile__link {
     margin: 0;
     padding: 16px 0 0 16px;
-    color: var(--text_color-red);
+    color: #EE3465;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
@@ -120,25 +120,24 @@
 
 @media screen and (max-width: 1279px) {
     .profile {
-        padding-top: 230px;
+        padding-top: 249px;
     }
 
     .profile__form {
-        padding-bottom: 191px;
+        padding-bottom:  215px;
         padding-right: 100px;
         padding-left: 100px;
     }
 
+
     .profile__title {
         padding-bottom: 80px;
     }
+    
 }
 
 @media screen and (max-width: 767px) {
-    .profile {
-        padding: 62px 23px 0;
-        ;
-    }
+   
 
     .profile__form {
         width: 100%;

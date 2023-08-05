@@ -21,17 +21,17 @@ import {
   endpointUnknown,
 } from '../../vendor/constants/endpoints';
 
-// TODO check unlogged header
+
 
 function App() {
-  // constants
+
   const [isLoggedIn] = useState(true);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isLoading] = useState(false);
   const [isShort, setShort] = useState(false);
   const [userName] = useState('Виталий');
   const [userEmail] = useState('test@test.ru');
-  // functions
+
   function setShortMovies() {
     isShort ? setShort(false) : setShort(true);
   }
@@ -47,7 +47,7 @@ function App() {
   function closePopup() {
     setPopupOpen(false);
   }
-  // layout
+
   return (
     <div className='app'>
       <Routes>

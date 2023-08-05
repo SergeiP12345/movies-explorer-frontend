@@ -18,12 +18,13 @@
 .my-input__error_visible {
     max-width: 90%;
     display: block;
-    color: var(--error_text-color);
+    color: #EE3465;
 }
 
 .profile__name_input {
     text-align: right;
     border: none;
+    padding: 0;
 }
 
 .profile__name-error {
@@ -33,6 +34,7 @@
 .profile__email_input {
     text-align: right;
     border: none;
+    padding: 0;
 }
 
 .profile__email-error {

@@ -13,6 +13,7 @@
         "text picture"
         "link picture";
     grid-template-columns: 600px 270px;
+    justify-content: space-between;
     -moz-column-gap: 270px;
     column-gap: 270px;
 }
@@ -116,7 +117,7 @@
             "text"
             "link";
         grid-template-columns: 292px;
-        grid-template-rows: 352px 76px 44px 400px 17px;
+        grid-template-rows: 352px 76px 44px 152px 17px;
         justify-content: center;
         justify-items: center;
     }

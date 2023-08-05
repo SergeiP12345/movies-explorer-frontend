@@ -13,11 +13,23 @@
 .navigation__link {
   padding: 0;
   text-decoration: none;
-  color: var(--general_text_color);
+  color: #000000;;
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+  
+}
+
+.navigation__link_main {
+  padding: 0;
+  text-decoration: none;
+  color: #ffffff;;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+fill:white;
 }
 
 .navigation__link_active {
@@ -50,7 +62,7 @@
   justify-content: center;
   min-height: 32px;
   aspect-ratio: 2.375/1;
-  color: var(--button_text_color);
+  color: #000000;
   background-color: var(--button_color);
   border-radius: 3px;
 }
@@ -59,7 +71,7 @@
   display: none;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 768px) {
   .logged-in {
     padding-right: 5px;
     justify-content: flex-end;
