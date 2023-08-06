@@ -120,7 +120,7 @@
         padding-top: 48px;
         padding-left: 48px;
         padding-bottom: 63px;
-        margin: 0;
+        margin: auto;
     }
 
     .login__label {
@@ -144,4 +144,12 @@
     .login__link {
         font-size: 12px;
     }
+}
+
+
+@media screen and (max-width: 500px) {
+.login__label {
+    width: 90%;
+    
+}
 }
