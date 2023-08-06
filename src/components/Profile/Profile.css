@@ -141,7 +141,7 @@
 
     .profile__form {
         width: 100%;
-        padding-bottom: 349px;
+        padding-bottom: 383px;
         padding-right: 0;
         padding-left: 0;
     }
@@ -160,5 +160,13 @@
 
     .profile__label_title {
         width: 15%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profile {
+        padding-top: 59px;
+        padding-right: 10px;
+        padding-left: 10px;
     }
 }

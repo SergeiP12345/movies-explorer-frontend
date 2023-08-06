@@ -152,3 +152,8 @@
         font-size: 12px;
     }
 }
+@media screen and (max-width: 500px) {
+    .register__form {
+    width: 90%;
+    }
+}

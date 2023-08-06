@@ -98,6 +98,7 @@
 @media screen and (max-width: 520px) {
     .popup__container {
         background-color: var(--background-color_white);
+        height: 100%;
         margin: 0;
         padding: 12px 0px 0px 0px;
         width: 100vw;

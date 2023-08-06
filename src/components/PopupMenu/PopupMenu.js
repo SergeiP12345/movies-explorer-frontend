@@ -54,8 +54,8 @@ export default function PopupMenu({ isOpen, onClose }) {
               className='account__link link'
               to={endpointProfile}
               onClick={onClose}
-            ></Link>
-            <img className='logo' src={accountLogo} alt='иконка аккаунта' />
+            > <img className='logo' src={accountLogo} alt='иконка аккаунта' /></Link>
+           
           </div>
         </div>
       </div>

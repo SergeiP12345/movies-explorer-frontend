@@ -48,7 +48,11 @@
     flex-direction: row-reverse;
   }
 }
-
+@media screen and (max-width: 768px) {
+  .filter {
+    padding-top: 17px;
+  }
+}
 @media screen and (max-width: 767px) {
   .filter {
     padding-top: 30px;

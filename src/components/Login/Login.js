@@ -19,7 +19,7 @@ export default function Login() {
         values.password = "";
         errors.email = "";
         errors.password = "";
-    }, []);
+    });
 
     const disableButton = errors.password !== "" || errors.email !== "";
 

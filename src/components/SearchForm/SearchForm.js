@@ -1,11 +1,14 @@
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import find from '../../images/find.svg';
+import { useLocation } from 'react-router-dom';
+
 export default function SearchForm({ isShort, setShort, isLoggedIn }) {
+  const location = useLocation();
   return (
-    <section className='search'>
+    <section  className={location.pathname === '/saved-movies' ? 'search_saved' : 'search'}>
       <form className='search__form'>
-        <div className='search__container'>
+        <div  className={location.pathname === '/saved-movies' ? 'search__container_saved' : 'search__container'}>
           <input className='search__input' type='search' placeholder='Фильм' />
           <button
             className='search__button button'

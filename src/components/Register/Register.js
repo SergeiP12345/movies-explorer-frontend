@@ -22,7 +22,7 @@ export default function Register() {
         errors.name = "";
         errors.email = "";
         errors.password = "";
-    }, []);
+    });
 
     const disableButton = errors.name !== "" || errors.email !== "";
 

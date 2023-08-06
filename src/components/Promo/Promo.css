@@ -3,7 +3,7 @@
   flex-direction: row-reverse;
   justify-content: center;
   margin: 0;
-  padding: 0 0 75px 60px;
+  padding: 0 0 75px 0px;
   background-color: #5c5c5c;
 }
 
@@ -27,6 +27,12 @@
 }
 .promo__url {
   text-decoration: none;
+  cursor: pointer;
+  width: 128px;
+  margin-top: 133px;
+  margin-left: 12px;
+
+  
 }
 .promo__text {
   color: #ffffff;
@@ -38,8 +44,7 @@
 
 .promo__button {
   font-size: 12px;
-  margin-top: 133px;
-  margin-left: 12px;
+  cursor: pointer;
   padding: 10px 21px 10px 15px;
   border-color: #ffffff;
   max-width: 129px;
@@ -55,12 +60,7 @@
   padding-right: 190px;
   background: url('../../images/promo-image.svg') no-repeat right center;
 }
-@media screen and (max-width: 1280px) {
-  .promo {
-    justify-content: flex-end;
- 
-  }
-}
+
 @media screen and (max-width: 1279px) {
  
   
@@ -80,6 +80,11 @@
     justify-content: center;
     align-items: center;
   }
+
+  .promo__url {
+  margin-left: auto;
+  margin-right: auto;
+}
 
   .promo__title {
     padding: 53px 0px 0px 0px;
