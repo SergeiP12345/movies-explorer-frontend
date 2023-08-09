@@ -14,22 +14,23 @@
   padding: 0;
   text-decoration: none;
   color: #000000;;
-  font-size: 13px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
-  
+  padding-right: 5px;
 }
 
 .navigation__link_main {
   padding: 0;
   text-decoration: none;
   color: #ffffff;;
-  font-size: 13px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
-fill:white;
+padding-right: 5px;
+
 }
 
 .navigation__link_active {
@@ -54,6 +55,18 @@ fill:white;
 .navigation__item {
   margin: 0;
   padding: 0;
+}
+
+.navigation__item_account { 
+  padding: 2px 5px 5px 5px;
+  border: 1px solid white;
+  border-radius: 29px;
+}
+
+.navigation__item_account_main {
+  padding: 2px 5px 5px 5px;
+  border: 1px solid black;
+  border-radius: 29px;
 }
 
 .navigation__button {

@@ -75,6 +75,7 @@ margin-bottom: 92px;
 
   .search__button {
     padding-right: 8px;
+    width: 97px;
   }
 }
 @media screen and (max-width: 320px) {

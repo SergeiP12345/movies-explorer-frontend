@@ -13,7 +13,11 @@ export default function MoviesCard({ savedMovies, deleteFromSaved }) {
 
   return (
     <div className='card'>
-      <img className='card__image' src={cardImage} alt='кинокартинка' />
+      <img
+        className='card__image'
+        src={cardImage}
+        alt='кинокартинка'
+      />
       <button
         className={
           savedMovies
@@ -24,9 +28,10 @@ export default function MoviesCard({ savedMovies, deleteFromSaved }) {
         }
         onClick={savedMovies ? deleteFromSaved : toggleCardSaved}
         aria-label={buttonText}
+        type='button'
       ></button>
       <div className='card__footer'>
-        <p className='card__title'>33 слова о дизайне</p>
+        <h2 className='card__title'>33 слова о дизайне</h2>
         <p className='card__duration'>1ч 17м</p>
       </div>
     </div>

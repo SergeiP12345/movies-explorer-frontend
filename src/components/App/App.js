@@ -21,10 +21,7 @@ import {
   endpointUnknown,
 } from '../../vendor/constants/endpoints';
 
-
-
 function App() {
-
   const [isLoggedIn] = useState(true);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isLoading] = useState(false);
@@ -55,7 +52,10 @@ function App() {
           path={endpointMain}
           element={
             <>
-              <Header isLoggedIn={isLoggedIn} onOpen={openPopup} />
+              <Header
+                isLoggedIn={isLoggedIn}
+                onOpen={openPopup}
+              />
               <Main />
               <Footer />
             </>
@@ -65,12 +65,17 @@ function App() {
           path={endpointMovies}
           element={
             <>
-              <Header isLoggedIn={isLoggedIn} onOpen={openPopup} />
-              <Movies
-                isShort={isShort}
-                setShortMovies={setShortMovies}
-                isLoading={isLoading}
+              <Header
+                isLoggedIn={isLoggedIn}
+                onOpen={openPopup}
               />
+              <main>
+                <Movies
+                  isShort={isShort}
+                  setShortMovies={setShortMovies}
+                  isLoading={isLoading}
+                />
+              </main>
               <Footer />
             </>
           }
@@ -79,12 +84,17 @@ function App() {
           path={endpointSavedMovies}
           element={
             <>
-              <Header isLoggedIn={isLoggedIn} onOpen={openPopup} />
-              <SavedMovies
-                isShort={isShort}
-                setShortMovies={setShortMovies}
-                deleteFromSaved={deleteFromSaved}
-              />
+              <Header
+                isLoggedIn={isLoggedIn}
+                onOpen={openPopup}
+              />{' '}
+              <main>
+                <SavedMovies
+                  isShort={isShort}
+                  setShortMovies={setShortMovies}
+                  deleteFromSaved={deleteFromSaved}
+                />{' '}
+              </main>
               <Footer />
             </>
           }
@@ -93,24 +103,38 @@ function App() {
           path={endpointProfile}
           element={
             <>
-              <Header isLoggedIn={isLoggedIn} onOpen={openPopup} />
-              <Profile
-                userName={userName}
-                userEmail={userEmail}
-                isProfile={true}
-              />
+              <Header
+                isLoggedIn={isLoggedIn}
+                onOpen={openPopup}
+              />{' '}
+              <main>
+                <Profile
+                  userName={userName}
+                  userEmail={userEmail}
+                  isProfile={true}
+                />{' '}
+              </main>
             </>
           }
         />
-        <Route path={endpointLogin} element={<Login isProfile={false} />} />
+        <Route
+          path={endpointLogin}
+          element={<Login isProfile={false} />}
+        />
         <Route
           path={endpointRegister}
           element={<Register isProfile={false} />}
         />
-        <Route path={endpointUnknown} element={<PageNotFound />} />
+        <Route
+          path={endpointUnknown}
+          element={<PageNotFound />}
+        />
       </Routes>
       {/* menu popup */}
-      <PopupMenu isOpen={isPopupOpen} onClose={closePopup} />
+      <PopupMenu
+        isOpen={isPopupOpen}
+        onClose={closePopup}
+      />
     </div>
   );
 }

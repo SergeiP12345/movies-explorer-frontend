@@ -36,9 +36,9 @@ export default function Navigation({ isLoggedIn, onOpen }) {
             </li>
           </ul>
           <ul className='navigation__list list navigation__account navigation__list_logged-in'>
-            <li className='navigation__item'>
+            <li className={location.pathname === '/' ? 'navigation__item navigation__item_account'  : 'navigation__item navigation__item_account_main' }>
             <Link
-                className='navigation__link link'
+                className={location.pathname === '/' ? 'navigation__link_main  link '  : 'navigation__link  link ' }
                 to={endpointProfile}
               >{location.pathname === '/' ? 
               (<img
@@ -51,7 +51,7 @@ export default function Navigation({ isLoggedIn, onOpen }) {
               src={accountLogo}
               alt='иконка аккаунта'
         
-            />}</Link>
+            />}Аккаунт</Link>
             </li>
            
           </ul>

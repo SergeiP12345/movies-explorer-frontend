@@ -8,6 +8,11 @@
     text-decoration: underline;
 }
 
+.logo{
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
 .popup__disabled {
     display: none;
 }
@@ -79,6 +84,9 @@
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
+    padding: 2px 5px 5px 5px;
+    border: 1px solid black;
+    border-radius: 29px;
 }
 
 @media screen and (max-width: 768px) {
