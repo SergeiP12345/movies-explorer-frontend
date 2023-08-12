@@ -15,12 +15,7 @@ export default function Promo() {
           className='promo__url'
           href='http://localhost:3000/#about-title'
         >
-          <button
-            className='promo__button'
-            type='button'
-          >
-            Узнать больше
-          </button>
+          Узнать больше
         </a>
       </div>
     </section>

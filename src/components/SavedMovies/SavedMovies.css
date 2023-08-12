@@ -6,18 +6,17 @@
 
   border: none;
   background: url('../../images/close-card-button.svg') center no-repeat;
- 
 }
 @media screen and (max-width: 768px) {
   .card__button_saved-movie {
     top: 206px;
-  right: 16px;
+    right: 16px;
   }
 }
 
 @media screen and (max-width: 350px) {
   .card__button_saved-movie {
     top: 192px;
-  right: 13px;
+    right: 13px;
   }
 }

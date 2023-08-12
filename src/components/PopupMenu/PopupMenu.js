@@ -17,6 +17,7 @@ export default function PopupMenu({ isOpen, onClose }) {
             className='popup__close-button'
             aria-label=''
             onClick={onClose}
+            type='button'
           ></button>
           <nav className='popup__navigation'>
             <ul className='popup__list list'>
@@ -54,8 +55,15 @@ export default function PopupMenu({ isOpen, onClose }) {
               className='account__link link'
               to={endpointProfile}
               onClick={onClose}
-            > <img className='logo' src={accountLogo} alt='иконка аккаунта' />Аккаунт</Link>
-           
+            >
+              {' '}
+              <img
+                className='logo'
+                src={accountLogo}
+                alt='иконка аккаунта'
+              />
+              Аккаунт
+            </Link>
           </div>
         </div>
       </div>

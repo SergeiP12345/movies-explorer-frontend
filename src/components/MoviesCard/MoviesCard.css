@@ -3,11 +3,12 @@
   padding: 0;
   position: relative;
   width: 270px;
+  filter: drop-shadow(0px 24px 16px rgba(0, 0, 0, 0.05));
 }
 
 .card__image {
   width: 100%;
-  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .card__button {
@@ -21,6 +22,7 @@
   border: none;
   aspect-ratio: 1/1;
   background: url('../../images/icon\ no\ save\ film.svg') center no-repeat;
+  cursor: pointer;
 }
 
 .card__button_saved {
@@ -30,6 +32,7 @@
   right: 13px;
   border: none;
   background: url('../../images/icon-save-film.svg') center no-repeat;
+  cursor: pointer;
 }
 
 .card__footer {
@@ -88,7 +91,7 @@
     right: 7px;
   }
 
-  .card__button_saved{
+  .card__button_saved {
     top: 208px;
     right: 16px;
   }
@@ -110,7 +113,7 @@
     top: 182px;
     right: 7px;
   }
-  .card__button_saved{
+  .card__button_saved {
     top: 182px;
     right: 7px;
   }

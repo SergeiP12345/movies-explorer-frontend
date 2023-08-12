@@ -26,6 +26,12 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 1150px) {
+  .header__logged-in {
+    grid-template-columns: 38px 90%;
+  }
+}
+
 @media screen and (max-width: 1279px) {
   .header {
     padding-left: 30px;
@@ -33,11 +39,9 @@
   }
 }
 @media screen and (max-width: 768px) {
-.header__logged-in {
- 
-  padding: 17px 25px 0px 32px;
- 
-}
+  .header__logged-in {
+    padding: 17px 25px 0px 32px;
+  }
 }
 @media screen and (max-width: 767px) {
   .header {
@@ -45,6 +49,6 @@
     padding-right: 31px;
   }
   .header__logged-in {
-  padding:17px 40px 26px 13px;
+    padding: 17px 40px 26px 13px;
   }
 }

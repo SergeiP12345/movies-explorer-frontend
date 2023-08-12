@@ -48,66 +48,67 @@ export default function Register() {
             className='register__label'
             htmlFor='register__name'
           >
-            Имя
-            <MyInput
-              id='register__name'
-              name='name'
-              error={errors.name}
-              type='text'
-              required
-              minLength='2'
-              maxLength='30'
-              placeholder='Виталий'
-              value={values.name}
-              onChange={handleChange}
-            />
+            Имя{' '}
           </label>
+          <MyInput
+            id='register__name'
+            name='name'
+            type='text'
+            required
+            minLength='2'
+            maxLength='30'
+            placeholder='Виталий'
+            value={values.name}
+            onChange={handleChange}
+          />
+          <span className='register__error'>{errors.name}</span>
+
           <label
             className='register__label'
             htmlFor='register__email'
           >
-            E-mail
-            <MyInput
-              id='register__email'
-              name='email'
-              error={errors.email}
-              type='email'
-              required
-              minLength='2'
-              maxLength='30'
-              placeholder='pohta@yandex.ru'
-              value={values.email}
-              onChange={handleChange}
-            />
+            E-mail{' '}
           </label>
+          <MyInput
+            id='register__email'
+            name='email'
+            type='email'
+            required
+            minLength='2'
+            maxLength='30'
+            placeholder='pohta@yandex.ru'
+            value={values.email}
+            onChange={handleChange}
+          />
+          <span className='register__error'>{errors.email}</span>
+
           <label
             className='register__label'
             htmlFor='register__password'
           >
-            Пароль
-            <MyInput
-              id='register__password'
-              name='password'
-              error={errors.password}
-              type='password'
-              required
-              placeholder='введите пароль'
-              value={values.password}
-              onChange={handleChange}
-            />
+            Пароль{' '}
           </label>
-          <form>
-            {' '}
-            <button
-              className='register__button button'
-              aria-label={buttonText}
-              disabled={disableButton}
-              onClick={handleSubmit}
-              type='submit'
-            >
-              {buttonText}
-            </button>
-          </form>
+          <MyInput
+            id='register__password'
+            name='password'
+            type='password'
+            required
+            placeholder='введите пароль'
+            minLength='5'
+            maxLength='30'
+            value={values.password}
+            onChange={handleChange}
+          />
+          <span className='register__error'>{errors.password}</span>
+          <button
+            className='register__button button'
+            aria-label={buttonText}
+            disabled={disableButton}
+            onClick={handleSubmit}
+            type='submit'
+          >
+            {buttonText}
+          </button>
           <p className='register__paragraph'>
             Уже зарегистрированы ?
             <Link
