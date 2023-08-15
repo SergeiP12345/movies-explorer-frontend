@@ -69,13 +69,13 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 onOpen={openPopup}
               />
-              <main>
-                <Movies
-                  isShort={isShort}
-                  setShortMovies={setShortMovies}
-                  isLoading={isLoading}
-                />
-              </main>
+
+              <Movies
+                isShort={isShort}
+                setShortMovies={setShortMovies}
+                isLoading={isLoading}
+              />
+
               <Footer />
             </>
           }
@@ -88,13 +88,11 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 onOpen={openPopup}
               />{' '}
-              <main>
-                <SavedMovies
-                  isShort={isShort}
-                  setShortMovies={setShortMovies}
-                  deleteFromSaved={deleteFromSaved}
-                />{' '}
-              </main>
+              <SavedMovies
+                isShort={isShort}
+                setShortMovies={setShortMovies}
+                deleteFromSaved={deleteFromSaved}
+              />{' '}
               <Footer />
             </>
           }
@@ -107,13 +105,11 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 onOpen={openPopup}
               />{' '}
-              <main>
-                <Profile
-                  userName={userName}
-                  userEmail={userEmail}
-                  isProfile={true}
-                />{' '}
-              </main>
+              <Profile
+                userName={userName}
+                userEmail={userEmail}
+                isProfile={true}
+              />{' '}
             </>
           }
         />

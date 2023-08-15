@@ -6,7 +6,7 @@ import { endpointMain } from '../../vendor/constants/endpoints';
 
 export default function Header({ isLoggedIn, onOpen, main }) {
   return (
-    <header className={main ? 'header header_main' : 'header'}>
+    <header className={main ? 'header header_main' : 'header '}>
       <Link to={endpointMain}>
         <img
           className='header__logo button'
