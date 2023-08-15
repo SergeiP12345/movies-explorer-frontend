@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import accountLogo from '../../images/account-icon.svg';
-import accountLogo2 from '../../images/account-icon2.svg';
 import './Navigation.css';
 import {
   endpointLogin,
@@ -9,10 +8,8 @@ import {
   endpointRegister,
   endpointSavedMovies,
 } from '../../vendor/constants/endpoints';
-import { useLocation } from 'react-router-dom';
 
 export default function Navigation({ isLoggedIn, onOpen }) {
-  const location = useLocation();
   return (
     <>
       {isLoggedIn ? (
@@ -20,11 +17,7 @@ export default function Navigation({ isLoggedIn, onOpen }) {
           <ul className='navigation__list list navigation__movies navigation__list_logged-in'>
             <li className='navigation__item'>
               <Link
-                className={
-                  location.pathname === '/'
-                    ? 'navigation__link_main navigation__link_active link navigation__link_logged-in'
-                    : 'navigation__link navigation__link_active link navigation__link_logged-in'
-                }
+                className='navigation__link navigation__link_active link navigation__link_logged-in'
                 to={endpointMovies}
               >
                 Фильмы
@@ -32,11 +25,7 @@ export default function Navigation({ isLoggedIn, onOpen }) {
             </li>
             <li className='navigation__item'>
               <Link
-                className={
-                  location.pathname === '/'
-                    ? 'navigation__link_main navigation__link_active link navigation__link_logged-in'
-                    : 'navigation__link navigation__link_active link navigation__link_logged-in'
-                }
+                className='navigation__link link navigation__link_logged-in'
                 to={endpointSavedMovies}
               >
                 Сохранённые фильмы
@@ -44,51 +33,26 @@ export default function Navigation({ isLoggedIn, onOpen }) {
             </li>
           </ul>
           <ul className='navigation__list list navigation__account navigation__list_logged-in'>
-            <li
-              className={
-                location.pathname === '/'
-                  ? 'navigation__item navigation__item_account'
-                  : 'navigation__item navigation__item_account_main'
-              }
-            >
+            <li className='navigation__item'>
               <Link
-                className={
-                  location.pathname === '/'
-                    ? 'navigation__link_main  link '
-                    : 'navigation__link  link '
-                }
+                className='navigation__link link'
                 to={endpointProfile}
               >
-                {location.pathname === '/' ? (
-                  <img
-                    className={
-                      location.pathname === '/'
-                        ? 'navigation__link_main  link '
-                        : 'navigation__link  link '
-                    }
-                    src={accountLogo2}
-                    alt='иконка аккаунта'
-                  />
-                ) : (
-                  <img
-                    className={
-                      location.pathname === '/'
-                        ? 'navigation__link_main  link '
-                        : 'navigation__link  link '
-                    }
-                    src={accountLogo}
-                    alt='иконка аккаунта'
-                  />
-                )}
                 Аккаунт
               </Link>
+            </li>
+            <li className='navigation__item'>
+              <img
+                className='navigation__logo'
+                src={accountLogo}
+                alt='иконка аккаунта'
+              />
             </li>
           </ul>
           <button
             className='navigation__popup-button'
             aria-label=''
             onClick={onOpen}
-            type='button'
           ></button>
         </nav>
       ) : (
@@ -96,11 +60,7 @@ export default function Navigation({ isLoggedIn, onOpen }) {
           <ul className='navigation__list list'>
             <li className='navigation__item'>
               <Link
-                className={
-                  location.pathname === '/'
-                    ? 'navigation__link_main navigation__link_active link navigation__link_logged-in'
-                    : 'navigation__link navigation__link_active link navigation__link_logged-in'
-                }
+                className='navigation__link link'
                 to={endpointRegister}
               >
                 Регистрация

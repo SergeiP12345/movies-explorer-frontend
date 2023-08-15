@@ -4,21 +4,15 @@ import {
   endpointMyGithub,
   endpointPraktikum,
 } from '../../vendor/constants/endpoints';
-import { useLocation } from 'react-router-dom';
 
 export default function Footer() {
-  const location = useLocation();
   return (
-    <footer
-      className={
-        location.pathname === '/saved-movies' ? 'footer__saved' : 'footer'
-      }
-    >
+    <footer className='footer'>
       <h2 className='footer__title'>
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h2>
       <div className='footer__lower-part'>
-        <p className='footer__copyright'>&copy; 2023 Sergei Popopv</p>
+        <p className='footer__copyright'>&copy; 2023 Sergei Popov</p>
         <ul className='footer__items list'>
           <li className='footer__item'>
             <Link

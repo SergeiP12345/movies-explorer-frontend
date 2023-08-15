@@ -1,23 +1,16 @@
 .header {
-  background-color: #5c5c5c;
+  background-color: var(--background-color_white);
   margin: 0;
-  padding: 20px 70px 22px 70px;
+  padding: 20px 70px;
   max-width: 100%;
   display: grid;
-  grid-template-columns: 38px 94%;
+  grid-template-columns: 38px 59%;
   align-items: center;
   justify-content: space-between;
 }
 
-.header__logged-in {
-  background-color: #ffffff;
-  margin: 0;
-  padding: 20px 70px 22px 70px;
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: 38px 94%;
-  align-items: center;
-  justify-content: space-between;
+.header_main {
+  background-color: var(--background-color_grey);
 }
 
 .header__logo {
@@ -26,29 +19,16 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 1150px) {
-  .header__logged-in {
-    grid-template-columns: 38px 90%;
-  }
-}
-
 @media screen and (max-width: 1279px) {
   .header {
     padding-left: 30px;
     padding-right: 18px;
   }
 }
-@media screen and (max-width: 768px) {
-  .header__logged-in {
-    padding: 17px 25px 0px 32px;
-  }
-}
+
 @media screen and (max-width: 767px) {
   .header {
     padding-left: 14px;
-    padding-right: 31px;
-  }
-  .header__logged-in {
-    padding: 17px 40px 26px 13px;
+    padding-right: 14px;
   }
 }

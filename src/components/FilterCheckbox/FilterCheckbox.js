@@ -1,14 +1,8 @@
 import './FilterCheckbox.css';
-import { useLocation } from 'react-router-dom';
 
 export default function FilterCheckbox({ isShort, setShort }) {
-  const location = useLocation();
   return (
-    <div
-      className={
-        location.pathname === '/saved-movies' ? 'filter__saved' : 'filter'
-      }
-    >
+    <div className='filter'>
       <input
         className='filter__checkbox'
         type='checkbox'

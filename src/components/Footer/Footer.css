@@ -2,14 +2,6 @@
   margin: 0;
   padding: 82px 70px 20px;
   text-align: center;
-  background-color: #ffffff;
-}
-
-.footer__saved {
-  margin: 0;
-  padding: 57px 70px 20px;
-  text-align: center;
-  background-color: #ffffff;
 }
 
 .footer__title {
@@ -68,15 +60,6 @@
     padding-right: 30px;
   }
 
-  .footer__saved {
-    padding-left: 30px;
-    padding-right: 17px;
-  }
-
-  .footer__items {
-    padding-right: 14px;
-  }
-
   .footer__lower-part {
     padding-top: 16px;
   }
@@ -84,13 +67,7 @@
 
 @media screen and (max-width: 767px) {
   .footer {
-    padding-top: 97px;
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .footer__saved {
-    padding-top: 72px;
+    padding-top: 80px;
     padding-left: 14px;
     padding-right: 14px;
   }

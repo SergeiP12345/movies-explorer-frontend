@@ -13,23 +13,11 @@
 .navigation__link {
   padding: 0;
   text-decoration: none;
-  color: #000000;
-  font-size: 14px;
+  color: var(--general_text_color);
+  font-size: 13px;
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
-  padding-right: 5px;
-}
-
-.navigation__link_main {
-  padding: 0;
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  padding-right: 5px;
 }
 
 .navigation__link_active {
@@ -48,24 +36,12 @@
 
 .navigation__account {
   padding-right: 7px;
-  gap: 7px;
+  gap: 25px;
 }
 
 .navigation__item {
   margin: 0;
   padding: 0;
-}
-
-.navigation__item_account {
-  padding: 2px 5px 5px 5px;
-  border: 1px solid white;
-  border-radius: 29px;
-}
-
-.navigation__item_account_main {
-  padding: 2px 5px 5px 5px;
-  border: 1px solid black;
-  border-radius: 29px;
 }
 
 .navigation__button {
@@ -74,18 +50,16 @@
   justify-content: center;
   min-height: 32px;
   aspect-ratio: 2.375/1;
-  color: #000000;
+  color: var(--button_text_color);
   background-color: var(--button_color);
   border-radius: 3px;
-  cursor: pointer;
 }
 
 .navigation__popup-button {
   display: none;
-  cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1279px) {
   .logged-in {
     padding-right: 5px;
     justify-content: flex-end;
