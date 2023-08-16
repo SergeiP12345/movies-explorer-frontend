@@ -1,60 +1,64 @@
 .filter {
-  margin: 0;
-  padding-top: 26px;
-  padding-bottom: 43px;
-  border-bottom: 1px solid var(--search_border_color);
-  display: flex;
-  gap: 14px;
+    margin: 0;
+    padding-top: 26px;
+    padding-bottom: 43px;
+    border-bottom: 1px solid var(--search_border_color);
+    display: flex;
+    gap: 14px;
 }
 
 .filter__label {
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
 }
 
 .filter__checkbox {
-  position: absolute;
-  width: 1px;
-  /* если у элемента не будет размеров, некоторые браузеры посчитают, что его вообще нет */
-  height: 1px;
-  -webkit-clip-path: inset(0 0 0 0);
-  clip-path: inset(0 0 0 0);
+    appearance: none;
+    background: var(--checkbox_background_color-black);
+    border-radius: 100px;
+    cursor: pointer;
+    height: 20px;
+    position: relative;
+    width: 36px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
-.filter__visible-checkbox {
-  display: block;
-  min-height: 20px;
-  width: 36px;
+.filter__checkbox::after {
+    background: var(--checkbox_switch_color-grey);
+    border-radius: 100%;
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 16px;
+    width: 16px;
 }
 
-.filter__visible-checkbox {
-  margin: 0;
-  padding: 0;
+.filter__checkbox:checked {
+    background: var(--checkbox_background_color-green);
 }
 
-.filter__checkbox:checked + .filter__visible-checkbox {
-  background: url('../../images/checkbox-active.svg') center no-repeat;
-}
-
-.filter__checkbox + .filter__visible-checkbox {
-  background: url('../../images/checkbox-inactive.svg') center no-repeat;
+.filter__checkbox:checked::after {
+    background: var(--checkbox_switch_color-white);
+    left: 18px;
 }
 
 @media screen and (max-width: 1279px) {
-  .filter {
-    padding-bottom: 47px;
-  }
+    .filter {
+        padding-bottom: 47px;
+    }
 }
 
 @media screen and (max-width: 767px) {
-  .filter {
-    padding-top: 30px;
-    padding-bottom: 63px;
-  }
+    .filter {
+        padding-top: 30px;
+        padding-bottom: 63px;
+    }
 
-  .filter__label {
-    font-size: 11px;
-  }
+    .filter__label {
+        font-size: 11px;
+    }
 }
