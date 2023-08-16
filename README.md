@@ -3,7 +3,7 @@
 Фронтенд для дипломного проекта Movies Explorer на курсе _Веб-разработки Яндекс.Практикума._
 
 Movies Explorer - сервис, в котором можно найти фильмы по запросу и сохранить их в личном кабинете.
-[Публичный адрес готового проекта](popov.lip.nomoreparties.sbs)
+[Публичный адрес готового проекта](https://popov.lip48.nomoreparties.sbs/)
 
 [Pull request](https://github.com/SergeiP12345/movies-explorer-frontend/pull/2)
 
