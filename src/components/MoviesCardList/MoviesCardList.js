@@ -2,7 +2,6 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import { mainApi } from '../../utils/MainApi';
-import { useEffect } from 'react';
 
 export default function MoviesCardList({
   currentUser,
@@ -15,6 +14,7 @@ export default function MoviesCardList({
   setMaxMovies,
   showMore,
   connectionError,
+  searchMovie,
   formValue,
 }) {
   const token = localStorage.getItem('token');
@@ -28,7 +28,11 @@ export default function MoviesCardList({
     mainApi
       .deleteMovie(movieToDelete._id, token)
       .then((res) => {
+        console.log(res);
         setSavedMovies(savedMovies.filter((m) => m._id !== movieToDelete._id));
+        if (isSavedMoviesPage) {
+          searchMovie(isSavedMoviesPage, formValue, false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -61,9 +65,6 @@ export default function MoviesCardList({
   const isSearched = localStorage.getItem('searchInput') !== null;
 
   let showMovies = movies.slice(0, maxMovies);
-  console.log(`movies quantity: "${movies.length}"`);
-  console.log(`showMovies quantity: "${showMovies.length}"`);
-  console.log(`значение поля: '${formValue}'`);
 
   const Cards = () => {
     return (
@@ -114,54 +115,40 @@ export default function MoviesCardList({
         isEmpty ? (
           isSavedMoviesPage ? (
             <>
-              <p>
-                показать все(savedMovies, был поиск в локалке, пустая строка)
-              </p>
+              {/* <p>показать все(savedMovies, был поиск в локалке, пустая строка)</p> */}
               {Cards()}
               {MoreButton()}
             </>
           ) : (
-            <p className='movies-card__not-found'>
-              ничего не найдено...(movies, был поиск в локалке, пустая строка )
-            </p>
+            <p className='movies-card__not-found'>ничего не найдено...</p>
           )
         ) : showMovies.length > 0 ? (
           <>
-            <p>Показать результат(не пустая строка)</p>
+            {/* <p>Показать результат(не пустая строка)</p> */}
             {Cards()}
             {MoreButton()}
           </>
         ) : (
-          <p className='movies-card__not-found'>
-            ничего не найдено...(результат поиска)
-          </p>
+          <p className='movies-card__not-found'>ничего не найдено...</p>
         )
       ) : isSavedMoviesPage ? (
         formValue === '' ? (
           <>
-            <p>
-              показать все(savedMovies, поиска не было в локалке, пустая строка)
-            </p>
+            {/* <p>показать все(savedMovies, поиска не было в локалке, пустая строка)</p> */}
             {Cards()}
             {MoreButton()}
           </>
         ) : showMovies.length > 0 ? (
           <>
-            <p>
-              показать результат поиска(savedMovies, поиска не было в локалке,
-              не пустая строка('{formValue}'))
-            </p>
+            {/* <p>показать результат поиска(savedMovies, поиска не было в локалке, не пустая строка('{formValue}'))</p> */}
             {Cards()}
             {MoreButton()}
           </>
         ) : (
-          <p className='movies-card__not-found'>
-            ничего не найдено...(результат поиска поиска не было в локалке, не
-            пустая строка)
-          </p>
+          <p className='movies-card__not-found'>ничего не найдено...</p>
         )
       ) : (
-        <p>не показывать ничего(поиска не было)</p>
+        <></>
       )}
     </section>
   );
