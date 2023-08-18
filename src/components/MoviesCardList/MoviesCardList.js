@@ -2,6 +2,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import { mainApi } from '../../utils/MainApi';
+import { useEffect, useState } from 'react';
 
 export default function MoviesCardList({
   currentUser,
@@ -16,7 +17,19 @@ export default function MoviesCardList({
   connectionError,
   searchMovie,
   formValue,
+  isShort,
 }) {
+  const [showMovies, setShowMovies] = useState([]);
+
+  useEffect(() => {
+    setShowMovies(movies.slice(0, maxMovies));
+  }, [movies, maxMovies]);
+
+  useEffect(() => {
+    if (isSavedMoviesPage) {
+      searchMovie(isSavedMoviesPage, formValue, isShort);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedMovies]);
   const token = localStorage.getItem('token');
 
   function deleteFromList(movie) {
@@ -28,11 +41,7 @@ export default function MoviesCardList({
     mainApi
       .deleteMovie(movieToDelete._id, token)
       .then((res) => {
-        console.log(res);
         setSavedMovies(savedMovies.filter((m) => m._id !== movieToDelete._id));
-        if (isSavedMoviesPage) {
-          searchMovie(isSavedMoviesPage, formValue, false);
-        }
       })
       .catch((err) => {
         console.log(err);
@@ -63,8 +72,6 @@ export default function MoviesCardList({
     : localStorage.getItem('searchInput') === '';
 
   const isSearched = localStorage.getItem('searchInput') !== null;
-
-  let showMovies = movies.slice(0, maxMovies);
 
   const Cards = () => {
     return (
@@ -101,7 +108,7 @@ export default function MoviesCardList({
       <></>
     );
   };
-  //----------------------------------------------------------------------
+
   return (
     <section className='movies-card'>
       {connectionError ? (
