@@ -217,11 +217,11 @@ function App() {
     return isShort
       ? filterShortMovies(
           items.filter((m) =>
-            m.nameRU.toLowerCase().includes(name.toLowerCase())
+            m.nameRU
           )
         )
       : items.filter((m) =>
-          m.nameRU.toLowerCase().includes(name.toLowerCase())
+          m.nameRU
         );
   }
 

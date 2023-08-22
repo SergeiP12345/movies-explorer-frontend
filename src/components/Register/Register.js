@@ -27,7 +27,7 @@ export default function Register({ errorMessage, handleRegistration }) {
     values.password = '';
     errors.name = '';
     errors.email = '';
-    errors.password = '';
+    errors.password = ''; // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleSubmit(e) {
@@ -76,8 +76,7 @@ export default function Register({ errorMessage, handleRegistration }) {
               res
                 ? errors.email
                 : errors.email
-                ? errors.email
-                : 'email должен быть в формате user@domain.any'
+             
             }
             type='email'
             required
