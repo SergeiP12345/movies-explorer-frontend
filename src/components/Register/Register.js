@@ -37,7 +37,10 @@ export default function Register({ errorMessage, handleRegistration }) {
 
   return (
     <section className='register'>
-      <form className='register__form'>
+      <form
+        className='register__form'
+        onSubmit={handleSubmit}
+      >
         <Link to={ENDPOINT_MAIN}>
           <img
             className='register__logo button'
@@ -72,12 +75,7 @@ export default function Register({ errorMessage, handleRegistration }) {
           <MyInput
             id='register__email'
             name='email'
-            error={
-              res
-                ? errors.email
-                : errors.email
-             
-            }
+            error={res ? errors.email : errors.email}
             type='email'
             required
             minLength='2'
@@ -112,18 +110,25 @@ export default function Register({ errorMessage, handleRegistration }) {
         ) : (
           <></>
         )}
-        <button
-          className={
-            isValidForm
-              ? 'register__button button'
-              : 'register__button button button_disabled'
-          }
-          aria-label={buttonText}
-          disabled={!isValidForm}
-          onClick={handleSubmit}
-        >
-          {buttonText}
-        </button>
+        {isValidForm ? (
+          <button
+            className='login__button button button_disabled'
+            aria-label={buttonText}
+            type='submit'
+          >
+            {' '}
+            {buttonText}
+          </button>
+        ) : (
+          <button
+            className='login__button button '
+            aria-label={buttonText}
+            type='submit'
+          >
+            {' '}
+            {buttonText}
+          </button>
+        )}
         <p className='register__paragraph'>
           Уже зарегистрированы ?
           <Link

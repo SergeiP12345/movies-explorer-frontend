@@ -24,6 +24,7 @@ export default function Login({ errorMessage, handleLogin }) {
     values.password = '';
     errors.email = '';
     errors.password = '';
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -87,14 +88,26 @@ export default function Login({ errorMessage, handleLogin }) {
         ) : (
           <></>
         )}
-        <button
-          className='login__button button'
-          aria-label={buttonText}
-          disabled={!isValidForm}
-          type='submit'
-        >
-          {buttonText}
-        </button>
+        {isValidForm ? (
+          <button
+            className='login__button button button_disabled'
+            aria-label={buttonText}
+            type='submit'
+          >
+            {' '}
+            {buttonText}
+          </button>
+        ) : (
+          <button
+            className='login__button button '
+            aria-label={buttonText}
+            type='submit'
+          >
+            {' '}
+            {buttonText}
+          </button>
+        )}
+
         <p className='login__paragraph'>
           Ещё не зарегистрированы ?
           <Link

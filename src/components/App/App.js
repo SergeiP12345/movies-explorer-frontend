@@ -40,6 +40,7 @@ import {
 } from '../../vendor/constants/constants';
 
 function App() {
+  // states
   const [currentUser, setCurrentUser] = useState({});
   const [connectionError, setConnectionError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -55,8 +56,11 @@ function App() {
   const [showMore, setShowMore] = useState(DESKTOP_CARDS_MORE);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  // constants
   const navigate = useNavigate();
 
+  // useEffects
+  // initial rendering
   useEffect(() => {
     setLoading(true);
     const jwt = localStorage.getItem('token');
@@ -74,6 +78,7 @@ function App() {
         setLoading(false);
       });
   }, []);
+  // rendering on conditions
   useEffect(() => {
     setLoading(true);
     const path = window.location.pathname;
@@ -97,19 +102,23 @@ function App() {
       }); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, navigate]);
 
+  // rendering on window resize
   useEffect(() => {
     window.addEventListener('resize', resizeWindow);
     handleResize();
 
+    // remove event listener when a component unmounts
     return () => {
       window.removeEventListener('resize', resizeWindow);
     }; // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowSize]);
 
+  // functions
   function resizeWindow() {
     setWindowSize(window.innerWidth);
   }
 
+  // set quantity of movies to display
   function handleResize() {
     if (windowSize >= DESKTOP_DISPLAY_SIZE) {
       setMaxMovies(DESKTOP_CARDS_DISPLAY);
@@ -182,6 +191,7 @@ function App() {
   }
 
   function handleLogout() {
+    // очищаем все стэйты
     setConnectionError(false);
     setCurrentUser({});
     setErrorMessage('');
@@ -196,32 +206,52 @@ function App() {
     setMaxMovies(DESKTOP_CARDS_DISPLAY);
     setShowMore(DESKTOP_CARDS_MORE);
     setWindowSize(window.innerWidth);
+    // обнуляем всё локальное хранилище
     localStorage.clear();
+    // переходим на главную страницу
     navigate(ENDPOINT_MAIN);
   }
 
+  // функция фильтрации короткометражек
   function filterShortMovies(items) {
+    // возвращаем отфильтрованный массив
     return items.filter((movie) => {
+      // в который заносятся все фильмы с заданными параметрами длительности
       return movie.duration <= SHORT_MOVIE_DURATION;
     });
   }
+  // функция возвращает найденные фильмы
   function findMovies(name, isSavedMoviesPage, isShort) {
     ('inside findMovies');
     const movies = JSON.parse(localStorage.getItem('movies')) || [];
 
-    const items = isSavedMoviesPage ? savedMovies : movies;
+    // если флаг isSavedMoviesPage
+    const items = isSavedMoviesPage
+      ? //true - передаем массив сохраненных фильмов
+        savedMovies
+      : // false - передаем массив фильмов
+        movies;
 
+    // если искомое значение - звездочка
     if (name === '*') {
-      return isShort ? filterShortMovies(items) : items;
+      // исходя из положения чекбокса короткометражек
+      return isShort
+        ? // возвращаем все короктометражные фильмы
+          filterShortMovies(items)
+        : // возвращаем все фильмы
+          items;
     }
+    // исходя из положения чекбокса короткометражек
     return isShort
-      ? filterShortMovies(
+      ? // возвращаем найденные короктометражные фильмы
+        filterShortMovies(
           items.filter((m) =>
-            m.nameRU
+            m.nameRU.toLowerCase().includes(name.toLowerCase())
           )
         )
-      : items.filter((m) =>
-          m.nameRU
+      : // возвращаем найденные фильмы
+        items.filter((m) =>
+          m.nameRU.toLowerCase().includes(name.toLowerCase())
         );
   }
 
@@ -230,37 +260,53 @@ function App() {
     isSavedMoviesPage
       ? setFoundSavedMovies(foundItems)
       : setFoundMovies(foundItems);
+    // запоминаем значение строки поиска для перезагрузки страницы
     const notSearchedYet = localStorage.getItem('searchInput') === null;
     const toStoreToLocal = !isSavedMoviesPage && !notSearchedYet;
 
     if (toStoreToLocal) {
       localStorage.setItem('searchInput', name || '');
+      // формируем из полученных фильмов строку
       const moviesToStore = JSON.stringify(movies);
+      // и кладём в локальное хранилище
       localStorage.setItem('movies', moviesToStore || '');
     }
   }
-
+  // функция поиска фильмов
   function searchMovie(isSavedMoviesPage, name, isShortFlag) {
     const isShort = isSavedMoviesPage
       ? isShortFlag
       : JSON.parse(localStorage.getItem('isShort'));
+    // достаем из локального хранилища фильмы
     const movies = JSON.parse(localStorage.getItem('movies')) || [];
+    // если поиск фильмов ещё не производился и в локальном хранилище ничего нет
     if (movies.length === 0 && !isSavedMoviesPage) {
+      // включаем прелоадер
       setLoading(true);
+      // обращаемся к апишке за фильмамиа
       moviesApi
         .getMovies()
+        // если данные из сервера пришли
         .then((res) => {
+          // формируем из полученных фильмов строку
           const moviesToStore = JSON.stringify(res);
+          // и кладём в локальное хранилище
           localStorage.setItem('movies', moviesToStore);
+          // запоминаем значение строки поиска для перезагрузки страницы
           if (!isSavedMoviesPage) {
             localStorage.setItem('searchInput', name || '');
           }
+          // storeFoundMovies(isSavedMoviesPage, name, movies, isShort)
           setFoundMovies(findMovies(name, isSavedMoviesPage, isShort));
         })
+        // если пришла ошибка
         .catch((err) => {
+          // отображаем её
           console.log(err);
         })
+        // в любом случае
         .finally(() => {
+          // отключаем прелоадер
           setLoading(false);
         });
     } else {
@@ -268,6 +314,7 @@ function App() {
     }
   }
 
+  // layout
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='app'>

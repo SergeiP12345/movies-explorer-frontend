@@ -65,13 +65,7 @@
     padding: 15px 125px;
 }
 
-.login__button:not([disabled]):hover {
-    opacity: 0.8;
-  }
-  
-  .login__button:disabled {
-    background-color:#A0A0A0;
-  }
+
 
 .login__paragraph {
     margin: 0;

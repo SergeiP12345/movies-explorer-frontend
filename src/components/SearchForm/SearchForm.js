@@ -11,7 +11,9 @@ export default function SearchForm({
   isSavedMoviesShort,
   setSavedMoviesShort,
   setFormValue,
+  setShort,
 }) {
+  // стэйт для чекбокса
   const [checked, setChecked] = useState(false);
   const buttonText = 'Поиск';
 
@@ -25,6 +27,7 @@ export default function SearchForm({
   useEffect(() => {
     values.movie = isSavedMoviesPage ? '' : searchInput;
     errors.movie = '';
+    // if there are movies find them
     const isSearched = JSON.parse(localStorage.getItem('movies')) !== null;
     if (isSearched) {
       searchMovie(isSavedMoviesPage, values.movie, checked);
@@ -78,6 +81,7 @@ export default function SearchForm({
           setSavedMoviesShort={setSavedMoviesShort}
           checked={checked}
           setChecked={setChecked}
+          setShort={setShort}
         />
       </form>
     </section>

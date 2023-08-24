@@ -28,6 +28,7 @@ export function useFormWithValidation(initialState) {
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
+
     [setValues, setErrors, setIsValid]
   );
 
