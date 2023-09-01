@@ -1,6 +1,6 @@
 import './Register.css';
 import { validate, res } from 'react-email-validator';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useFormWithValidation } from '../hooks/useForm';
 import {
   ENDPOINT_MAIN,
@@ -19,8 +19,6 @@ export default function Register({ errorMessage, handleRegistration }) {
     password: '',
   });
 
-  const [isValidForm, setValidForm] = useState(isValid);
-
   useEffect(() => {
     values.name = '';
     values.email = '';
@@ -32,7 +30,7 @@ export default function Register({ errorMessage, handleRegistration }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleRegistration(values, setValidForm);
+    handleRegistration(values);
   }
 
   return (
@@ -110,20 +108,22 @@ export default function Register({ errorMessage, handleRegistration }) {
         ) : (
           <></>
         )}
-        {isValidForm ? (
+        {isValid ? (
           <button
-            className='login__button button button_disabled'
+            className='login__button button '
             aria-label={buttonText}
             type='submit'
+            disabled={!isValid}
           >
             {' '}
             {buttonText}
           </button>
         ) : (
           <button
-            className='login__button button '
+            className='login__button button button_disabled'
             aria-label={buttonText}
             type='submit'
+            disabled={!isValid}
           >
             {' '}
             {buttonText}

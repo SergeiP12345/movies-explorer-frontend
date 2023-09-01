@@ -1,7 +1,7 @@
 import './Login.css';
 import { Link } from 'react-router-dom';
 import { validate, res } from 'react-email-validator';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useFormWithValidation } from '../hooks/useForm';
 import MyInput from '../UI/MyInput/MyInput';
 import {
@@ -17,8 +17,6 @@ export default function Login({ errorMessage, handleLogin }) {
     password: '',
   });
 
-  const [isValidForm, setValidForm] = useState(isValid);
-
   useEffect(() => {
     values.email = '';
     values.password = '';
@@ -30,7 +28,7 @@ export default function Login({ errorMessage, handleLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleLogin(values, setValidForm);
+    handleLogin(values);
   }
   return (
     <section className='login'>
@@ -75,7 +73,7 @@ export default function Login({ errorMessage, handleLogin }) {
           <MyInput
             id='login__password'
             name='password'
-            error={errors.password}
+            error={res ? errors.password : errors.password}
             type='password'
             required
             placeholder='введите пароль'
@@ -88,20 +86,22 @@ export default function Login({ errorMessage, handleLogin }) {
         ) : (
           <></>
         )}
-        {isValidForm ? (
+        {isValid ? (
           <button
-            className='login__button button button_disabled'
+            className='login__button button '
             aria-label={buttonText}
             type='submit'
+            disabled={!isValid}
           >
             {' '}
             {buttonText}
           </button>
         ) : (
           <button
-            className='login__button button '
+            className='login__button button button_disabled'
             aria-label={buttonText}
             type='submit'
+            disabled={!isValid}
           >
             {' '}
             {buttonText}

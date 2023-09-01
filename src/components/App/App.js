@@ -56,6 +56,7 @@ function App() {
   const [showMore, setShowMore] = useState(DESKTOP_CARDS_MORE);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [, setValidForm] = useState(false);
   // constants
   const navigate = useNavigate();
 
@@ -102,23 +103,20 @@ function App() {
       }); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, navigate]);
 
-  // rendering on window resize
   useEffect(() => {
     window.addEventListener('resize', resizeWindow);
     handleResize();
 
-    // remove event listener when a component unmounts
     return () => {
       window.removeEventListener('resize', resizeWindow);
     }; // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [windowSize]);
+  }, [windowSize, foundMovies]);
 
   // functions
   function resizeWindow() {
     setWindowSize(window.innerWidth);
   }
 
-  // set quantity of movies to display
   function handleResize() {
     if (windowSize >= DESKTOP_DISPLAY_SIZE) {
       setMaxMovies(DESKTOP_CARDS_DISPLAY);
@@ -140,7 +138,7 @@ function App() {
     setPopupOpen(false);
   }
 
-  function handleRegistration(data, setValidForm) {
+  function handleRegistration(data) {
     const { email, password, name } = data;
     setValidForm(false);
     register(email, password, name)
@@ -168,14 +166,13 @@ function App() {
       });
   }
 
-  function handleLogin({ password, email }, setValid) {
-    setValid(false);
+  function handleLogin({ password, email }) {
     login(password, email)
       .then(({ token }) => {
         localStorage.setItem('token', token);
         setToken(token);
         setLoggedIn(true);
-        navigate(ENDPOINT_MOVIES);
+        navigate('/movies');
       })
       .catch((err) => {
         console.log(err);
@@ -186,8 +183,7 @@ function App() {
             setErrorMessage('Вы ввели неправильный логин или пароль.');
           }
         }
-      })
-      .finally(() => setValid(true));
+      });
   }
 
   function handleLogout() {
@@ -225,12 +221,7 @@ function App() {
     ('inside findMovies');
     const movies = JSON.parse(localStorage.getItem('movies')) || [];
 
-    // если флаг isSavedMoviesPage
-    const items = isSavedMoviesPage
-      ? //true - передаем массив сохраненных фильмов
-        savedMovies
-      : // false - передаем массив фильмов
-        movies;
+    const items = isSavedMoviesPage ? savedMovies : movies;
 
     // если искомое значение - звездочка
     if (name === '*') {

@@ -122,7 +122,7 @@ export default function MoviesCardList({
         isEmpty ? (
           isSavedMoviesPage ? (
             <>
-              {/* <p>показать все(savedMovies, был поиск в локалке, пустая строка)</p> */}
+              {}
               {Cards()}
               {MoreButton()}
             </>
@@ -131,7 +131,7 @@ export default function MoviesCardList({
           )
         ) : showMovies.length > 0 ? (
           <>
-            {/* <p>Показать результат(не пустая строка)</p> */}
+            {}
             {Cards()}
             {MoreButton()}
           </>
@@ -141,13 +141,13 @@ export default function MoviesCardList({
       ) : isSavedMoviesPage ? (
         formValue === '' ? (
           <>
-            {/* <p>показать все(savedMovies, поиска не было в локалке, пустая строка)</p> */}
+            {}
             {Cards()}
             {MoreButton()}
           </>
         ) : showMovies.length > 0 ? (
           <>
-            {/* <p>показать результат поиска(savedMovies, поиска не было в локалке, не пустая строка('{formValue}'))</p> */}
+            {}
             {Cards()}
             {MoreButton()}
           </>
