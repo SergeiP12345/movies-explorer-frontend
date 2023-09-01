@@ -1,42 +1,93 @@
-import { Link } from 'react-router-dom';
 import MyInput from '../UI/MyInput/MyInput';
-import { useState, useEffect } from 'react';
+import { validate, res } from 'react-email-validator';
+import { useEffect, useState } from 'react';
 import './Profile.css';
-import useForm from '../hooks/useForm';
-import { endpointMain } from '../../vendor/constants/endpoints';
+import { useFormWithValidation } from '../hooks/useForm';
+import { mainApi } from '../../utils/MainApi';
 
-export default function Profile({ userName, userEmail, isProfile }) {
-  const [isDisabled, setDisabled] = useState(true);
+export default function Profile({
+  errorMessage,
+  setErrorMessage,
+  currentUser,
+  setCurrentUser,
+  handleLogout,
+  isEditableForm,
+  setEditableForm,
+  isSaved,
+  setSaved,
+}) {
+  const { values, errors, handleChange, isValid, resetForm } =
+    useFormWithValidation({
+      name: currentUser.name,
+      email: currentUser.email,
+      isValid: false,
+    });
 
-  const { values, errors, handleChange } = useForm({
-    name: userName,
-    email: userEmail,
-  });
+  const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
-    values.name = userName;
-    values.email = userEmail;
+    setErrorText(errorText);
+    validate(currentUser.email);
+    values.name = currentUser.name;
+    values.email = currentUser.email;
     errors.name = '';
     errors.email = '';
-  });
+  }, [currentUser, errorText]);
 
   function enableForm() {
-    setDisabled(false);
+    setEditableForm(true);
   }
+
+  function handleProfileEdit({ name, email }) {
+    setErrorMessage('');
+    const token = localStorage.getItem('token');
+    mainApi
+      .editProfileInfo(name, email, token)
+      .then(({ email, name }) => {
+        setEditableForm(false);
+        setCurrentUser({ name, email });
+        setSaved(true);
+        setErrorText('Новые данные успешно сохранены');
+      })
+      .catch((err) => {
+        resetForm(currentUser);
+
+        setEditableForm(false);
+
+        setSaved(false);
+
+        err instanceof TypeError
+          ? setErrorText('При обновлении профиля произошла ошибка.')
+          : err.includes('409')
+          ? setErrorText('Пользователь с таким email уже существует.')
+          : setErrorText('При обновлении профиля произошла ошибка.');
+      });
+  }
+
+  function handleSubmit() {
+    handleProfileEdit(values);
+    setSaved(true);
+  }
+
+  const changeDataCheck = () => {
+    return (
+      values.name === currentUser.name && values.email === currentUser.email
+    );
+  };
 
   return (
     <section className='profile'>
       <form className='profile__form'>
         <fieldset
           className='profile__fieldset'
-          disabled={isDisabled}
+          disabled={!isEditableForm}
         >
-          <h1 className='profile__title'>Привет, {userName}!</h1>
+          <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
           <label
             className='profile__label'
             htmlFor='profile__name'
           >
-            <span className='profile__label_title'>Имя</span>
+            <span className='profile__label-title'>Имя</span>
             <MyInput
               id='profile__name'
               name='name'
@@ -46,7 +97,7 @@ export default function Profile({ userName, userEmail, isProfile }) {
               minLength='2'
               maxLength='30'
               placeholder='введите имя'
-              value={values.name}
+              value={values.name || ''}
               onChange={handleChange}
             />
           </label>
@@ -55,39 +106,84 @@ export default function Profile({ userName, userEmail, isProfile }) {
             className='profile__label'
             htmlFor='profile__email'
           >
-            <span className='profile__label_title'>E-mail</span>
+            <span className='profile__label-title'>E-mail</span>
             <MyInput
               id='profile__email'
               name='email'
-              error={errors.email}
+              error={
+                res
+                  ? errors.email
+                  : errors.email
+                  ? errors.email
+                  : 'email должен быть в формате user@domain.any'
+              }
               type='email'
               required
               minLength='2'
               maxLength='30'
               placeholder='введите е-майл'
-              value={values.email}
-              onChange={handleChange}
+              value={values.email || ''}
+              onChange={(e) => {
+                validate(e.target.value);
+                handleChange(e);
+              }}
             />
           </label>
         </fieldset>
       </form>
-
-      <>
-        <button
-          className='profile__button'
-          onClick={enableForm}
-          aria-label='Редактировать'
-          type='button'
-        >
-          Редактировать
-        </button>
-        <Link
-          className='profile__link link'
-          to={endpointMain}
-        >
-          Выйти из аккаунта
-        </Link>
-      </>
+      {isEditableForm ? (
+        <>
+          <span
+            className={
+              errorMessage
+                ? 'profile__save-error save-error-visible'
+                : 'profile__save-error '
+            }
+          >
+            {errorMessage}
+          </span>
+          <button
+            className={
+              changeDataCheck()
+                ? 'button profile__save-button_disabled profile__save-button'
+                : isValid && res
+                ? 'profile__save-button button'
+                : 'button profile__save-button_disabled profile__save-button'
+            }
+            onClick={handleSubmit}
+            aria-label='Сохранить'
+            disabled={changeDataCheck() ? true : !(isValid && res)}
+          >
+            Сохранить
+          </button>
+        </>
+      ) : (
+        <>
+          <span
+            className={
+              isSaved || errorText !== ''
+                ? 'profile__save-error save-error-visible'
+                : 'profile__save-error '
+            }
+          >
+            {errorText}
+          </span>
+          <button
+            className='profile__button'
+            onClick={enableForm}
+            aria-label='Редактировать'
+          >
+            Редактировать
+          </button>
+          <button
+            className='profile__button profile__button_type_logout'
+            onClick={handleLogout}
+            aria-label='Выйти из аккаунта'
+          >
+            Выйти из аккаунта
+          </button>
+        </>
+      )}
     </section>
   );
 }

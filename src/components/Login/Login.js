@@ -1,18 +1,18 @@
 import './Login.css';
 import { Link } from 'react-router-dom';
+import { validate, res } from 'react-email-validator';
 import { useEffect } from 'react';
-import useForm from '../hooks/useForm';
+import { useFormWithValidation } from '../hooks/useForm';
 import MyInput from '../UI/MyInput/MyInput';
 import {
-  endpointMain,
-  endpointRegister,
+  ENDPOINT_MAIN,
+  ENDPOINT_REGISTER,
 } from '../../vendor/constants/endpoints';
 import logo from '../../images/logo.svg';
 
-export default function Login() {
+export default function Login({ errorMessage, handleLogin }) {
   const buttonText = 'Войти';
-
-  const { values, errors, handleChange } = useForm({
+  const { values, errors, handleChange, isValid } = useFormWithValidation({
     email: '',
     password: '',
   });
@@ -22,84 +22,103 @@ export default function Login() {
     values.password = '';
     errors.email = '';
     errors.password = '';
-  });
 
-  const disableButton = errors.password !== '' || errors.email !== '';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('submitting login form');
-    console.log(values);
+    handleLogin(values);
   }
   return (
-    <main>
-      <section className='login'>
-        <form className='login__form'>
-          <Link to={endpointMain}>
-            <img
-              className='login__logo button'
-              src={logo}
-              alt='логотип'
-            />
-          </Link>
-          <h1 className='login__title'>Рады видеть!</h1>
-          <label
-            className='login__label'
-            htmlFor='login__email'
-          >
-            E-mail
-          </label>
+    <section className='login'>
+      <form
+        className='login__form'
+        onSubmit={handleSubmit}
+      >
+        <Link to={ENDPOINT_MAIN}>
+          <img
+            className='login__logo button'
+            src={logo}
+            alt='логотип'
+          />
+        </Link>
+        <h2 className='login__title'>Рады видеть!</h2>
+        <label
+          className='login__label'
+          htmlFor='login__email'
+        >
+          E-mail
           <MyInput
             id='login__email'
             name='email'
+            error={res ? errors.email : errors.email}
             type='email'
             required
             minLength='2'
             maxLength='30'
             placeholder='введите е-майл'
             value={values.email}
-            onChange={handleChange}
-          />{' '}
-          <span className='login__error'>{errors.email}</span>
-          <label
-            className='login__label'
-            htmlFor='login__password'
-          >
-            Пароль
-          </label>
+            onChange={(e) => {
+              validate(e.target.value);
+              handleChange(e);
+            }}
+          />
+        </label>
+        <label
+          className='login__label'
+          htmlFor='login__password'
+        >
+          Пароль
           <MyInput
             id='login__password'
             name='password'
+            error={res ? errors.password : errors.password}
             type='password'
             required
-            minLength='5'
-            maxLength='30'
             placeholder='введите пароль'
             value={values.password}
             onChange={handleChange}
-          />{' '}
-          <span className='login__error'>{errors.password}</span>
+          />
+        </label>
+        {errorMessage ? (
+          <p className='form__error-message'>{errorMessage}</p>
+        ) : (
+          <></>
+        )}
+        {isValid ? (
           <button
-            className='login__button button'
+            className='login__button button '
             aria-label={buttonText}
-            disabled={disableButton}
-            onClick={handleSubmit}
             type='submit'
+            disabled={!isValid}
           >
+            {' '}
             {buttonText}
           </button>
-          <p className='login__paragraph'>
-            Ещё не зарегистрированы ?
-            <Link
-              className='login__link link'
-              to={endpointRegister}
-            >
-              {' '}
-              Регистрация
-            </Link>
-          </p>
-        </form>
-      </section>
-    </main>
+        ) : (
+          <button
+            className='login__button button button_disabled'
+            aria-label={buttonText}
+            type='submit'
+            disabled={!isValid}
+          >
+            {' '}
+            {buttonText}
+          </button>
+        )}
+
+        <p className='login__paragraph'>
+          Ещё не зарегистрированы ?
+          <Link
+            className='login__link link'
+            to={ENDPOINT_REGISTER}
+          >
+            {' '}
+            Регистрация
+          </Link>
+        </p>
+      </form>
+    </section>
   );
 }

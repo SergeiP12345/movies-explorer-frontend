@@ -1,12 +1,12 @@
 import './AboutMe.css';
 import { Link } from 'react-router-dom';
-import { endpointMyGithub } from '../../vendor/constants/endpoints';
+import { ENDPOINT_MY_GITHUB } from '../../vendor/constants/endpoints';
 import myPortfolioImage from '../../images/portfolio.jpg';
 
 export default function AboutMe() {
   return (
     <section className='about-me'>
-      <h2 className='about-me__header '>Студент</h2>
+      <h2 className='about-me__header section-title'>Студент</h2>
       <article className='about-me__article'>
         <img
           className='about-me__image'
@@ -24,7 +24,7 @@ export default function AboutMe() {
         </p>
         <Link
           className='about-me__link link'
-          to={endpointMyGithub}
+          to={ENDPOINT_MY_GITHUB}
           target='_blank'
         >
           Github

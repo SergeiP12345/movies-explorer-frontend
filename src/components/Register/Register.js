@@ -1,15 +1,19 @@
 import './Register.css';
+import { validate, res } from 'react-email-validator';
 import { useEffect } from 'react';
-import useForm from '../hooks/useForm';
-import { endpointMain, endpointLogin } from '../../vendor/constants/endpoints';
+import { useFormWithValidation } from '../hooks/useForm';
+import {
+  ENDPOINT_MAIN,
+  ENDPOINT_LOGIN,
+} from '../../vendor/constants/endpoints';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 import MyInput from '../UI/MyInput/MyInput';
 
-export default function Register() {
+export default function Register({ errorMessage, handleRegistration }) {
   const buttonText = 'Зарегистрироваться';
 
-  const { values, errors, handleChange } = useForm({
+  const { values, errors, handleChange, isValid } = useFormWithValidation({
     name: '',
     email: '',
     password: '',
@@ -21,106 +25,121 @@ export default function Register() {
     values.password = '';
     errors.name = '';
     errors.email = '';
-    errors.password = '';
-  });
-
-  const disableButton = errors.name !== '' || errors.email !== '';
+    errors.password = ''; // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('submitting register form');
-    console.log(values);
+    handleRegistration(values);
   }
 
   return (
-    <main>
-      <section className='register'>
-        <form className='register__form'>
-          <Link to={endpointMain}>
-            <img
-              className='register__logo button'
-              src={logo}
-              alt='логотип'
-            />
-          </Link>
-          <h1 className='register__title'>Добро пожаловать!</h1>
-          <label
-            className='register__label'
-            htmlFor='register__name'
-          >
-            Имя{' '}
-          </label>
+    <section className='register'>
+      <form
+        className='register__form'
+        onSubmit={handleSubmit}
+      >
+        <Link to={ENDPOINT_MAIN}>
+          <img
+            className='register__logo button'
+            src={logo}
+            alt='логотип'
+          />
+        </Link>
+        <h2 className='register__title'>Добро пожаловать!</h2>
+        <label
+          className='register__label'
+          htmlFor='register__name'
+        >
+          Имя
           <MyInput
             id='register__name'
             name='name'
+            error={errors.name}
             type='text'
             required
             minLength='2'
             maxLength='30'
-            placeholder='Виталий'
+            placeholder='введите имя'
             value={values.name}
             onChange={handleChange}
           />
-          <span className='register__error'>{errors.name}</span>
-
-          <label
-            className='register__label'
-            htmlFor='register__email'
-          >
-            E-mail{' '}
-          </label>
+        </label>
+        <label
+          className='register__label'
+          htmlFor='register__email'
+        >
+          E-mail
           <MyInput
             id='register__email'
             name='email'
+            error={res ? errors.email : errors.email}
             type='email'
             required
             minLength='2'
             maxLength='30'
-            placeholder='pohta@yandex.ru'
+            placeholder='введите е-майл'
             value={values.email}
-            onChange={handleChange}
-          />
-          <span className='register__error'>{errors.email}</span>
+            onChange={(e) => {
+              validate(e.target.value);
 
-          <label
-            className='register__label'
-            htmlFor='register__password'
-          >
-            Пароль{' '}
-          </label>
+              handleChange(e);
+            }}
+          />
+        </label>
+        <label
+          className='register__label'
+          htmlFor='register__password'
+        >
+          Пароль
           <MyInput
             id='register__password'
             name='password'
+            error={errors.password}
             type='password'
             required
             placeholder='введите пароль'
-            minLength='5'
-            maxLength='30'
             value={values.password}
             onChange={handleChange}
           />
-          <span className='register__error'>{errors.password}</span>
+        </label>
+        {errorMessage ? (
+          <p className='form__error-message'>{errorMessage}</p>
+        ) : (
+          <></>
+        )}
+        {isValid ? (
           <button
-            className='register__button button'
+            className='login__button button '
             aria-label={buttonText}
-            disabled={disableButton}
-            onClick={handleSubmit}
             type='submit'
+            disabled={!isValid}
           >
+            {' '}
             {buttonText}
           </button>
-          <p className='register__paragraph'>
-            Уже зарегистрированы ?
-            <Link
-              className='register__link link'
-              to={endpointLogin}
-            >
-              {' '}
-              Войти
-            </Link>
-          </p>
-        </form>
-      </section>
-    </main>
+        ) : (
+          <button
+            className='login__button button button_disabled'
+            aria-label={buttonText}
+            type='submit'
+            disabled={!isValid}
+          >
+            {' '}
+            {buttonText}
+          </button>
+        )}
+        <p className='register__paragraph'>
+          Уже зарегистрированы ?
+          <Link
+            className='register__link link'
+            to={ENDPOINT_LOGIN}
+          >
+            {' '}
+            Войти
+          </Link>
+        </p>
+      </form>
+    </section>
   );
 }
